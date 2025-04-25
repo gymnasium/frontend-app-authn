@@ -110,8 +110,8 @@ const PasswordField = (props) => {
         {formatMessage(messages['one.number'])}
       </span>
       <span id="characters-check" className="d-flex align-items-center">
-        {props.value.length >= 8 ? <Icon className="text-success mr-1" src={Check} /> : <Icon className="mr-1 text-light-700" src={Remove} />}
-        {formatMessage(messages['eight.characters'])}
+        {props.value.length >= `12` ? <Icon className="text-success mr-1" src={Check} /> : <Icon className="mr-1 text-light-700" src={Remove} />}
+        {formatMessage(messages['twelve.characters'])}
       </span>
     </Tooltip>
   );
