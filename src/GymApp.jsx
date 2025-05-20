@@ -27,7 +27,7 @@ import { RecommendationsPage } from './recommendations';
 import { RegistrationPage } from './register';
 import { ResetPasswordPage } from './reset-password';
 
-import { GymFooter as FooterSlot, GymHeader } from '@openedx/gym-frontend';
+import { Footer as FooterSlot, Header } from '@openedx/gym-frontend';
 
 import './GymApp.scss';
 
@@ -35,7 +35,7 @@ registerIcons();
 
 const GymApp = () => (
   <AppProvider store={configureStore()}>
-    <GymHeader />
+    <Header />
     <main>
     <div className="container">
     <Routes>
