@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getConfig } from '@edx/frontend-platform';
+import { ensureConfig, getConfig } from '@edx/frontend-platform';
 import { AppProvider } from '@edx/frontend-platform/react';
 import { Helmet } from 'react-helmet';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -29,6 +29,10 @@ import { ResetPasswordPage } from './reset-password';
 
 import { Footer as FooterSlot, Header } from '@openedx/gym-frontend';
 
+ensureConfig(['SHOW_REGISTRATION_LINKS', 'ALLOW_PUBLIC_ACCOUNT_CREATION'], 'Register');
+
+const showRegistration = () => getConfig().ALLOW_PUBLIC_ACCOUNT_CREATION === true || getConfig().SHOW_REGISTRATION_LINKS === true;
+
 import './GymApp.scss';
 
 registerIcons();
@@ -50,7 +54,8 @@ const GymApp = () => (
           <UnAuthOnlyRoute><Logistration selectedPage={LOGIN_PAGE} /></UnAuthOnlyRoute>
         }
       />
-      <Route path={REGISTER_PAGE} element={<UnAuthOnlyRoute><Logistration /></UnAuthOnlyRoute>} />
+      {showRegistration() && 
+      <Route path={REGISTER_PAGE} element={<UnAuthOnlyRoute><Logistration /></UnAuthOnlyRoute>} />}
       <Route path={RESET_PAGE} element={<UnAuthOnlyRoute><ForgotPasswordPage /></UnAuthOnlyRoute>} />
       <Route path={PASSWORD_RESET_CONFIRM} element={<ResetPasswordPage />} />
       <Route path={AUTHN_PROGRESSIVE_PROFILING} element={<ProgressiveProfiling />} />
